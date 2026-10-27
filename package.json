@@ -1,0 +1,9 @@
+{
+  "name": "hockey",
+  "private": true,
+  "description": "Матч-центр КХЛ — сайт hockey.kotoryy.ru и сборщик данных",
+  "scripts": {
+    "collect": "node collector/collect.js .local-data",
+    "serve": "node collector/serve.js"
+  }
+}

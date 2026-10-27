@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Матч-центр КХЛ</title>
+  <meta name="description" content="Новости, составы, таблица и календарь двух команд КХЛ перед матчем">
+  <meta name="theme-color" content="#070c18">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    // Тема до отрисовки, чтобы не мигало
+    try { document.documentElement.dataset.theme = localStorage.getItem('matchcenter.theme') || 'dark'; } catch (e) {}
+  </script>
+</head>
+<body>
+  <header class="top">
+    <div class="brand"><img src="icons/logo.png" alt=""><span>Матч-центр</span></div>
+    <nav class="tabs">
+      <button data-tab="match" class="on">Матч</button>
+      <button data-tab="news">Новости <i id="news-count"></i></button>
+      <button data-tab="teams">Составы</button>
+      <button data-tab="table">Таблица</button>
+      <button data-tab="calendar">Календарь</button>
+    </nav>
+    <div class="actions">
+      <span id="updated" class="muted"></span>
+      <button id="pick" class="ghost" title="Выбрать другие команды">Команды</button>
+      <button id="theme" class="ghost icon" title="Светлая / тёмная тема">◐</button>
+      <button id="refresh" class="ghost icon" title="Обновить">⟳</button>
+    </div>
+  </header>
+
+  <div id="errors" class="errors" hidden></div>
+
+  <main>
+    <section id="tab-match" class="tab on"></section>
+    <section id="tab-news" class="tab">
+      <div class="toolbar">
+        <div class="chips" id="news-filter"></div>
+        <label class="check"><input type="checkbox" id="hide-bets" checked> Скрыть прогнозы букмекеров</label>
+        <input id="news-search" type="search" placeholder="Поиск по новостям…">
+      </div>
+      <div id="news-list" class="news"></div>
+    </section>
+    <section id="tab-teams" class="tab"></section>
+    <section id="tab-table" class="tab"></section>
+    <section id="tab-calendar" class="tab"></section>
+  </main>
+  <footer class="foot muted">Данные: Sports.ru, Чемпионат, Спорт-Экспресс, Google Новости · время московское · обновляется каждые 20 минут</footer>
+
+  <dialog id="picker">
+    <form method="dialog">
+      <h2>Какой матч смотрим?</h2>
+      <p class="muted">Матч-центр найдёт ближайшую игру этих команд в календаре КХЛ.</p>
+      <div class="pick-row">
+        <select id="pick-a"></select><span>—</span><select id="pick-b"></select>
+      </div>
+      <div class="pick-actions">
+        <button value="cancel" class="ghost">Отмена</button>
+        <button value="ok" class="primary">Показать</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="app.js"></script>
+</body>
+</html>
